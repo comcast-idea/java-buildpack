@@ -39,6 +39,7 @@ module JavaBuildpack
 
       # (see JavaBuildpack::Component::BaseComponent#detect)
       def detect
+        @configuration['version'] = ENV['JAVA_VERSION'] if ENV['JAVA_VERSION']
         @version, @uri = JavaBuildpack::Repository::ConfiguredItem.find_item(@component_name, @configuration)
         super
       end
