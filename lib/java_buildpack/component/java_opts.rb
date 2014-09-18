@@ -62,8 +62,12 @@ module JavaBuildpack
       # @param [String] key             the key of the option
       # @param [Pathname, String] value the value of the system property
       # @return [JavaOpts]              +self+ for chaining
-      def add_option(key, value)
-        self << "#{key}=#{qualify_value(value)}"
+      def add_option(key, *value)
+        if value.empty?
+          self << "#{key}"
+        else
+          self << "#{key}=#{qualify_value(value.first)}"
+        end
         self
       end
 
